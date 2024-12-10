@@ -1,4 +1,4 @@
-import { Grid2 as Grid, Typography } from "@mui/material";
+import { Button, Grid2 as Grid, Typography } from "@mui/material";
 import styles from "./styles";
 import {
 	AssessmentOutlined,
@@ -6,8 +6,10 @@ import {
 	PublicOutlined,
 	RedeemOutlined,
 } from "@mui/icons-material";
+import { useNavigate } from "react-router";
 
 const Home = () => {
+	let navigate = useNavigate();
 	return (
 		<>
 			<div style={styles.container}>
@@ -27,14 +29,18 @@ const Home = () => {
 					Tunaikan zakat hanya dengan sentuhan jari anda
 				</Typography>
 
-				<Grid sx={{ width: "70%" }} container mt={10} spacing={5}>
+				<Grid sx={{ width: "65%" }} container mt={10} spacing={5}>
 					<Grid
 						size={3}
 						justifyItems='center'
 						border='6px solid white'
 						borderRadius={6}
-						paddingY={5}
-						spacing={5}
+						paddingY={4}
+						component={Button}
+						display="flex"
+						flexDirection="column"
+						textTransform="capitalize"
+						onClick={() => {navigate("/zakat")}}
 					>
 						<RedeemOutlined sx={{ fontSize: "80px" }} htmlColor='white' />
 						<Typography
@@ -42,6 +48,7 @@ const Home = () => {
 							fontWeight={600}
 							textAlign='center'
 							color='white'
+							mt={1}
 						>
 							Bayar
 							<br />
@@ -53,8 +60,12 @@ const Home = () => {
 						justifyItems='center'
 						border='6px solid white'
 						borderRadius={6}
-						paddingY={5}
-						spacing={5}
+						paddingY={4}
+						component={Button}
+						display="flex"
+						flexDirection="column"
+						textTransform="capitalize"
+						onClick={() => {navigate("/kalkulator")}}
 					>
 						<CalculateOutlined sx={{ fontSize: "80px" }} htmlColor='white' />
 						<Typography
@@ -62,6 +73,7 @@ const Home = () => {
 							fontWeight={600}
 							textAlign='center'
 							color='white'
+							mt={1}
 						>
 							Kalkulator
 							<br />
@@ -73,8 +85,12 @@ const Home = () => {
 						justifyItems='center'
 						border='6px solid white'
 						borderRadius={6}
-						paddingY={5}
-						spacing={5}
+						paddingY={4}
+						component={Button}
+						display="flex"
+						flexDirection="column"
+						textTransform="capitalize"
+						onClick={() => {navigate("/laporan")}}
 					>
 						<AssessmentOutlined sx={{ fontSize: "80px" }} htmlColor='white' />
 						<Typography
@@ -82,6 +98,7 @@ const Home = () => {
 							fontWeight={600}
 							textAlign='center'
 							color='white'
+							mt={1}
 						>
 							Laporan
 							<br />
@@ -93,8 +110,12 @@ const Home = () => {
 						justifyItems='center'
 						border='6px solid white'
 						borderRadius={6}
-						paddingY={5}
-						spacing={5}
+						paddingY={4}
+						component={Button}
+						display="flex"
+						flexDirection="column"
+						textTransform="capitalize"
+						onClick={() => {navigate("/kabar")}}
 					>
 						<PublicOutlined sx={{ fontSize: "80px" }} htmlColor='white' />
 						<Typography
@@ -102,6 +123,7 @@ const Home = () => {
 							fontWeight={600}
 							textAlign='center'
 							color='white'
+							mt={1}
 						>
 							Kabar
 							<br />

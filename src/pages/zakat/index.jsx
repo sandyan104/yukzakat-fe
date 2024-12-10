@@ -18,8 +18,10 @@ import {
 import styles from "./styles";
 import { useState } from "react";
 import niat from "../../assets/niat.png";
+import { useNavigate } from "react-router";
 
 const Zakat = () => {
+	let navigate = useNavigate();
 	const [age, setAge] = useState("");
 
 	const handleChange = (event) => {
@@ -121,7 +123,13 @@ const Zakat = () => {
 					<img src={niat} width='80%' style={{ marginBottom: "20px" }} />
 					<Grid container sx={{ width: "100%" }} spacing={3}>
 						<Grid item size={6}>
-							<Button fullWidth variant='outlined'>
+							<Button
+								fullWidth
+								variant='outlined'
+								onClick={() => {
+									navigate(-1);
+								}}
+							>
 								Kembali
 							</Button>
 						</Grid>
