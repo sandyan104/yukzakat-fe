@@ -18,7 +18,7 @@ import {
 import styles from "./styles";
 import { useState } from "react";
 import niat from "../../assets/niat.png";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 const Zakat = () => {
 	let navigate = useNavigate();
