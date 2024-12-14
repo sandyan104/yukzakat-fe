@@ -118,7 +118,7 @@ const Home = () => {
 						display="flex"
 						flexDirection="column"
 						textTransform="capitalize"
-						onClick={() => {navigate("/kabar")}}
+						onClick={() => {navigate("/artikel")}}
 					>
 						<PublicOutlined sx={{ fontSize: "80px" }} htmlColor='white' />
 						<Typography
