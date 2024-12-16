@@ -19,10 +19,11 @@ import styles from "./styles";
 import { useState } from "react";
 import niat from "../../assets/niat.png";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 const Zakat = () => {
 	let navigate = useNavigate();
-	const [age, setAge] = useState("");
+	const {handleSubmit, control} = useForm()
 
 	const handleChange = (event) => {
 		setAge(event.target.value);
