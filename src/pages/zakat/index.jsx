@@ -4,8 +4,6 @@ import {
 	FormControl,
 	FormControlLabel,
 	FormLabel,
-	Grid2 as Grid,
-	InputAdornment,
 	InputLabel,
 	MenuItem,
 	Paper,
@@ -15,29 +13,99 @@ import {
 	TextField,
 	Typography,
 } from "@mui/material";
+import { useState } from "react";
+import axios from "axios";
 import styles from "./styles";
-// import { useState } from "react";
-import niat from "../../assets/niat.png";
-import { useNavigate } from "react-router-dom";
-// import { useForm } from "react-hook-form";
 
 const Zakat = () => {
-	let navigate = useNavigate();
-	// const {handleSubmit, control} = useForm()
+	const [formData, setFormData] = useState({
+		nama_mz: "",
+		jk_mz: "P",
+		no_telp_mz: "",
+		email_mz: "",
+		tgl_Zakat: new Date().toISOString().split("T")[0], // Default to today
+		id_tipe: "",
+		id_rekap: 1, // Replace with your logic for assigning `id_rekap`
+	});
 
-	// const handleChange = (event) => {
-	// 	setAge(event.target.value);
-	// };
+	// Handle form changes
+	const handleChange = (e) => {
+		const { name, value } = e.target;
+		setFormData((prev) => ({
+			...prev,
+			[name]: value,
+		}));
+	};
+
+	const handleSubmit = async () => {
+		try {
+			const response = await axios.post("http://localhost:8000/zakat/", formData);
+			console.log("Success:", response.data);
+			alert("Zakat entry created successfully!");
+		} catch (error) {
+			console.error("Error submitting zakat:", error);
+			alert("Failed to submit zakat.");
+		}
+	};
+
+	const [image, setImage] = useState(null);
+	const [preview, setPreview] = useState(null);
+
+	// Handle file change
+	const handleFileChange = (e) => {
+		const file = e.target.files[0];
+		if (file) {
+			setImage(file);
+
+			// Generate preview
+			const reader = new FileReader();
+			reader.onloadend = () => {
+				setPreview(reader.result);
+			};
+			reader.readAsDataURL(file);
+		}
+	};
+
+	// Handle form submission
+	const handleSubmitImage = async (e) => {
+		e.preventDefault();
+
+		// Create FormData object
+		const data = new FormData();
+		data.append("nama_mz", formData.nama_mz);
+		data.append("jk_mz", formData.jk_mz);
+		data.append("no_telp_mz", formData.no_telp_mz);
+		data.append("email_mz", formData.email_mz);
+		data.append("tgl_Zakat", formData.tgl_Zakat);
+		data.append("id_tipe", formData.id_tipe);
+		data.append("id_rekap", formData.id_rekap);
+		data.append("nominal", formData.nominal);
+		if (image) data.append("hero_image", image);
+
+		try {
+			const response = await axios.post("http://localhost:8000/zakat/", data, {
+				headers: {
+					"Content-Type": "multipart/form-data",
+				},
+			});
+			alert("Zakat entry created successfully!");
+		} catch (error) {
+			console.error("Error submitting zakat:", error);
+			alert("Failed to submit zakat.");
+		}
+	};
+
 
 	return (
 		<>
 			<div style={styles.container}>
-				<Typography variant='h4' mt={4} mb={6} color='white' fontWeight={300}>
+			<form onSubmit={handleSubmitImage}>
+				<Typography variant="h4" mt={4} mb={6} color="white" fontWeight={300}>
 					<b>Yuk</b>Zakat.id
 				</Typography>
 				<Container
 					disableGutters
-					maxWidth='sm'
+					maxWidth="sm"
 					component={Paper}
 					sx={{
 						borderRadius: 4,
@@ -49,114 +117,114 @@ const Zakat = () => {
 					}}
 				>
 					<Typography
-						variant='h4'
+						variant="h4"
 						mb={4}
-						color='#4a628a'
+						color="#4a628a"
 						fontWeight={700}
-						textAlign='center'
+						textAlign="center"
 					>
 						Formulir Zakat
 					</Typography>
 					<TextField
-						label='Nama'
-						variant='outlined'
+						label="Nama"
+						variant="outlined"
 						fullWidth
+						name="nama_mz"
+						value={formData.nama_mz}
+						onChange={handleChange}
 						sx={{ marginBottom: "20px" }}
 					/>
 					<FormControl sx={{ marginBottom: "20px" }} fullWidth>
-						<FormLabel id='demo-radio-buttons-group-label'>
-							Jenis Kelamin
-						</FormLabel>
+						<FormLabel id="gender-label">Jenis Kelamin</FormLabel>
 						<RadioGroup
 							row
-							aria-labelledby='demo-radio-buttons-group-label'
-							defaultValue='pria'
-							name='radio-buttons-group'
+							aria-labelledby="gender-label"
+							name="jk_mz"
+							value={formData.jk_mz}
+							onChange={handleChange}
 						>
-							<FormControlLabel value='pria' control={<Radio />} label='Pria' />
-							<FormControlLabel
-								value='wanita'
-								control={<Radio />}
-								label='Wanita'
-							/>
+							<FormControlLabel value="P" control={<Radio />} label="Pria" />
+							<FormControlLabel value="W" control={<Radio />} label="Wanita" />
 						</RadioGroup>
 					</FormControl>
 					<TextField
-						label='Nomor Telepon/Whatsapp'
-						variant='outlined'
+						label="Nomor Telepon/Whatsapp"
+						variant="outlined"
 						fullWidth
+						name="no_telp_mz"
+						value={formData.no_telp_mz}
+						onChange={handleChange}
 						sx={{ marginBottom: "20px" }}
 					/>
 					<TextField
-						label='Email'
-						variant='outlined'
+						label="Email"
+						variant="outlined"
 						fullWidth
+						name="email_mz"
+						value={formData.email_mz}
+						onChange={handleChange}
 						sx={{ marginBottom: "20px" }}
 					/>
 					<FormControl fullWidth sx={{ marginBottom: "20px" }}>
-						<InputLabel id='demo-simple-select-label'>Jenis Zakat</InputLabel>
+						<InputLabel id="zakat-type-label">Jenis Zakat</InputLabel>
 						<Select
-							labelId='demo-simple-select-label'
-							id='demo-simple-select'
-							// value={age}
-							label='Jenis Zakat'
-							// onChange={handleChange}
+							labelId="zakat-type-label"
+							name="id_tipe"
+							value={formData.id_tipe}
+							onChange={handleChange}
 						>
-							<MenuItem value={10}>Mal</MenuItem>
-							<MenuItem value={20}>Fitrah</MenuItem>
-							<MenuItem value={30}>Penghasilan</MenuItem>
-							<MenuItem value={30}>Emas</MenuItem>
+							<MenuItem value={1}>Mal</MenuItem>
+							<MenuItem value={2}>Fitrah</MenuItem>
+							<MenuItem value={3}>Penghasilan</MenuItem>
+							<MenuItem value={4}>Emas</MenuItem>
 						</Select>
 					</FormControl>
 					<TextField
-						label='Nominal'
-						variant='outlined'
+						label="Nominal"
+						variant="outlined"
 						fullWidth
-						slotProps={{
-							input: {
-								startAdornment: (
-									<InputAdornment position='start'>Rp</InputAdornment>
-								),
-							},
+						name="nominal"
+						value={formData.nominal}
+						onChange={handleChange}
+						InputProps={{
+							startAdornment: <Typography sx={{ marginRight: 1 }}>Rp</Typography>,
 						}}
 						sx={{ marginBottom: "20px" }}
 					/>
-					<img src={niat} width='80%' style={{ marginBottom: "20px" }} />
-					<Grid container sx={{ width: "100%" }} spacing={3}>
-						<Grid item size={6}>
-							<Button
-								fullWidth
-								variant='outlined'
-								onClick={() => {
-									navigate(-1);
-								}}
-							>
-								Kembali
-							</Button>
-						</Grid>
-						<Grid item size={6}>
-							<Button fullWidth variant='contained'>
-								Bayar Zakat
-							</Button>
-						</Grid>
-					</Grid>
+					
+						<input type="file" accept="image/*" onChange={handleFileChange} />
+						{preview && <img src={preview} alt="Preview" width="200" />}
+						<Button type="submit" variant="contained" color="primary">
+							Submit
+						</Button>
+
+					<Button
+						fullWidth
+						variant="contained"
+						onClick={handleSubmit}
+						sx={{ marginBottom: "20px" }}
+					>
+						Bayar Zakat
+					</Button>
 				</Container>
-			</div>
-			<div
-				style={{
-					width: "100%",
-					padding: "50px 80px",
-					backgroundColor: "#4A628A",
-				}}
-			>
-				<Typography variant='h5' mb={2} color='white' fontWeight={300}>
-					<b>Yuk</b>Zakat.id
-				</Typography>
-				<Typography variant='body2' color='white' fontWeight={200}>
-					Jl. Raya Katapang-Andir, Sangkanhurip, Katapang, Kab.Bandung
-					<br />
-					Jl. Kebon Bibit Barat, Tamansari, Bandungwetan, Kota Bandung
-				</Typography>
+
+				<div
+					style={{
+						width: "100%",
+						padding: "50px 80px",
+						backgroundColor: "#4A628A",
+					}}
+				>
+					<Typography variant='h5' mb={2} color='white' fontWeight={300}>
+						<b>Yuk</b>Zakat.id
+					</Typography>
+					<Typography variant='body2' color='white' fontWeight={200}>
+						Jl. Raya Katapang-Andir, Sangkanhurip, Katapang, Kab.Bandung
+						<br />
+						Jl. Kebon Bibit Barat, Tamansari, Bandungwetan, Kota Bandung
+					</Typography>
+				</div>
+				</form>
 			</div>
 		</>
 	);
