@@ -10,6 +10,7 @@ import {
 	Radio,
 	RadioGroup,
 	Select,
+	Stack,
 	TextField,
 	Typography,
 } from "@mui/material";
@@ -39,7 +40,10 @@ const Zakat = () => {
 
 	const handleSubmit = async () => {
 		try {
-			const response = await axios.post("http://localhost:8000/zakat/", formData);
+			const response = await axios.post(
+				"http://localhost:8000/zakat/",
+				formData
+			);
 			console.log("Success:", response.data);
 			alert("Zakat entry created successfully!");
 		} catch (error) {
@@ -95,17 +99,15 @@ const Zakat = () => {
 		}
 	};
 
-
 	return (
 		<>
 			<div style={styles.container}>
-			<form onSubmit={handleSubmitImage}>
-				<Typography variant="h4" mt={4} mb={6} color="white" fontWeight={300}>
+				<Typography variant='h4' mt={4} mb={6} color='white' fontWeight={300}>
 					<b>Yuk</b>Zakat.id
 				</Typography>
 				<Container
 					disableGutters
-					maxWidth="sm"
+					maxWidth='sm'
 					component={Paper}
 					sx={{
 						borderRadius: 4,
@@ -117,59 +119,59 @@ const Zakat = () => {
 					}}
 				>
 					<Typography
-						variant="h4"
+						variant='h4'
 						mb={4}
-						color="#4a628a"
+						color='#4a628a'
 						fontWeight={700}
-						textAlign="center"
+						textAlign='center'
 					>
 						Formulir Zakat
 					</Typography>
 					<TextField
-						label="Nama"
-						variant="outlined"
+						label='Nama'
+						variant='outlined'
 						fullWidth
-						name="nama_mz"
+						name='nama_mz'
 						value={formData.nama_mz}
 						onChange={handleChange}
 						sx={{ marginBottom: "20px" }}
 					/>
 					<FormControl sx={{ marginBottom: "20px" }} fullWidth>
-						<FormLabel id="gender-label">Jenis Kelamin</FormLabel>
+						<FormLabel id='gender-label'>Jenis Kelamin</FormLabel>
 						<RadioGroup
 							row
-							aria-labelledby="gender-label"
-							name="jk_mz"
+							aria-labelledby='gender-label'
+							name='jk_mz'
 							value={formData.jk_mz}
 							onChange={handleChange}
 						>
-							<FormControlLabel value="P" control={<Radio />} label="Pria" />
-							<FormControlLabel value="W" control={<Radio />} label="Wanita" />
+							<FormControlLabel value='P' control={<Radio />} label='Pria' />
+							<FormControlLabel value='W' control={<Radio />} label='Wanita' />
 						</RadioGroup>
 					</FormControl>
 					<TextField
-						label="Nomor Telepon/Whatsapp"
-						variant="outlined"
+						label='Nomor Telepon/Whatsapp'
+						variant='outlined'
 						fullWidth
-						name="no_telp_mz"
+						name='no_telp_mz'
 						value={formData.no_telp_mz}
 						onChange={handleChange}
 						sx={{ marginBottom: "20px" }}
 					/>
 					<TextField
-						label="Email"
-						variant="outlined"
+						label='Email'
+						variant='outlined'
 						fullWidth
-						name="email_mz"
+						name='email_mz'
 						value={formData.email_mz}
 						onChange={handleChange}
 						sx={{ marginBottom: "20px" }}
 					/>
 					<FormControl fullWidth sx={{ marginBottom: "20px" }}>
-						<InputLabel id="zakat-type-label">Jenis Zakat</InputLabel>
+						<InputLabel id='zakat-type-label'>Jenis Zakat</InputLabel>
 						<Select
-							labelId="zakat-type-label"
-							name="id_tipe"
+							labelId='zakat-type-label'
+							name='id_tipe'
 							value={formData.id_tipe}
 							onChange={handleChange}
 						>
@@ -180,27 +182,42 @@ const Zakat = () => {
 						</Select>
 					</FormControl>
 					<TextField
-						label="Nominal"
-						variant="outlined"
+						label='Nominal'
+						variant='outlined'
 						fullWidth
-						name="nominal"
+						name='nominal'
 						value={formData.nominal}
 						onChange={handleChange}
 						InputProps={{
-							startAdornment: <Typography sx={{ marginRight: 1 }}>Rp</Typography>,
+							startAdornment: (
+								<Typography sx={{ marginRight: 1 }}>Rp</Typography>
+							),
 						}}
 						sx={{ marginBottom: "20px" }}
 					/>
-					
-						<input type="file" accept="image/*" onChange={handleFileChange} />
-						{preview && <img src={preview} alt="Preview" width="200" />}
-						<Button type="submit" variant="contained" color="primary">
-							Submit
-						</Button>
+
+					<Stack direction='row' spacing={2} sx={{ width: "100%" }} mb={3}>
+						<TextField
+							label='Bukti Pembayaran'
+							fullWidth
+							InputProps={{
+								startAdornment: <></>,
+								endAdornment: (
+									<Button onClick={handleSubmitImage} color='primary'>
+										Submit
+									</Button>
+								),
+							}}
+							type='file'
+							accept='image/*'
+							onChange={handleFileChange}
+						/>
+					</Stack>
+					{preview && <img src={preview} alt='Preview' width='200' />}
 
 					<Button
 						fullWidth
-						variant="contained"
+						variant='contained'
 						onClick={handleSubmit}
 						sx={{ marginBottom: "20px" }}
 					>
@@ -224,7 +241,6 @@ const Zakat = () => {
 						Jl. Kebon Bibit Barat, Tamansari, Bandungwetan, Kota Bandung
 					</Typography>
 				</div>
-				</form>
 			</div>
 		</>
 	);
