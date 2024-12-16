@@ -36,7 +36,10 @@ const Artikel = () => {
 	return (
 		<>
 			<div style={styles.container}>
-				<Typography variant='h4' mt={4} mb={6} color='white' fontWeight={300}>
+				<Typography variant='h4' mt={4} mb={6} color='white' fonFtWeight={300}
+					component={ButtonBase}
+					onClick={routeChange}
+				>
 					<b>Yuk</b>Zakat.id
 				</Typography>
 				<Container
@@ -63,8 +66,8 @@ const Artikel = () => {
 					</Typography>
 
 					<Grid container spacing={3}>
-						<Grid item size={{ xs: 12, md: 6, lg:3  }}>
-							<img width="100%" src="https://randomwordgenerator.com/img/picture-generator/55e6d5444254af14f1dc8460962e33791c3ad6e04e50744075277cdc964fc0_640.jpg" alt=""/>
+						<Grid item size={{ xs: 12, md: 6, lg: 3 }}>
+							<img width="100%" src="https://randomwordgenerator.com/img/picture-generator/55e6d5444254af14f1dc8460962e33791c3ad6e04e50744075277cdc964fc0_640.jpg" alt="" />
 						</Grid>
 						<Grid item size="grow">
 							<Typography gutterBottom variant="h5" component="div" >

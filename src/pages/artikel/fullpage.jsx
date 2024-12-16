@@ -29,14 +29,17 @@ const ArtikelPenuh = () => {
     let navigate = useNavigate();
     const [age, setAge] = useState("");
 
-    const handleChange = (event) => {
-        setAge(event.target.value);
-    };
-
+    const routeChange = () => {
+        let path = `/`;
+        navigate(path);
+    }
     return (
         <>
             <div style={styles.container}>
-                <Typography variant='h4' mt={4} mb={6} color='white' fontWeight={300}>
+                <Typography variant='h4' mt={4} mb={6} color='white' fontWeight={300}
+                    component={ButtonBase}
+                    onClick={routeChange}
+                >
                     <b>Yuk</b>Zakat.id
                 </Typography>
                 <Container
@@ -62,7 +65,7 @@ const ArtikelPenuh = () => {
                         Judul
                     </Typography>
 
-                    
+
 
                     <Typography
                         variant='h6'
@@ -73,7 +76,7 @@ const ArtikelPenuh = () => {
                     >
                         Penulis
                     </Typography>
-                    
+
                     <img width="720px" src="https://randomwordgenerator.com/img/picture-generator/55e6d5444254af14f1dc8460962e33791c3ad6e04e50744075277cdc964fc0_640.jpg" alt="" />
                     <Typography variant="body1" my={4} sx={{ color: 'text.secondary' }}>
                         Lizards are a widespread group of squamate reptiles, with over 6,000

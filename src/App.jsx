@@ -11,6 +11,8 @@ import AdminLogin from "./pages/admin/login";
 import Dashboard from "./pages/admin/dashboard";
 import AdminZakat from "./pages/admin/zakat";
 import AdminLayout from "./pages/admin/AdminLayout";
+import Laporan from "./pages/laporan";
+import LaporanDetail from "./pages/laporan/fullpage";
 
 function App() {
 	return (
@@ -21,7 +23,9 @@ function App() {
 				<Route path='/zakat' element={<Zakat />} />
 				<Route path='/artikel' element={<Artikel />} />	
 				<Route path='/artikel/penuh' element={<ArtikelPenuh />} />
-				<Route path='/kalkulator' element={<Kalkulator />} />			
+				<Route path='/kalkulator' element={<Kalkulator />} />	
+				<Route path='/laporan' element={<Laporan />} />
+				<Route path='/laporan/detail' element={<LaporanDetail />} />
 				<Route path='/artikel' element={<Artikel />} />
 				<Route path='/artikel/penuh' element={<ArtikelPenuh />} />
 				<Route element={<LoginRoute />}>

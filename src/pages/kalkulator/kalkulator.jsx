@@ -42,7 +42,10 @@ function Kalkulator() {
 
   return (
     <div style={styles.container}>
-      <Typography variant='h4' mt={4} mb={6} color='white' fontWeight={300}>
+      <Typography variant='h4' mt={4} mb={6} color='white' fontWeight={300}
+        component={ButtonBase}
+        onClick={routeChange}
+      >
         <b>Yuk</b>Zakat.id
       </Typography>
       <Box
@@ -79,25 +82,25 @@ function Kalkulator() {
           InputProps={{
             startAdornment: <Typography sx={{ marginRight: 1 }}>Rp</Typography>,
           }}
-          sx={{ mb: 2}}
+          sx={{ mb: 2 }}
         />
 
         <Typography
           variant="h8"
-          fontWeight={500} 
-          sx={{display: 'flex', justifyContent: 'center'}}>
+          fontWeight={500}
+          sx={{ display: 'flex', justifyContent: 'center' }}>
           Jumlah Penghasilan per Bulan
         </Typography>
 
         <Typography
           variant="h6"
-          fontWeight={700} 
-          sx={{display: 'flex', justifyContent: 'center'}}>
+          fontWeight={700}
+          sx={{ display: 'flex', justifyContent: 'center' }}>
           Rp{jumlahPenghasilan.toLocaleString('id-ID')}
         </Typography>
 
-        {zakat !== null &&  (
-          <Typography variant="h6" sx={{ mt: 2, color: 'green', display: 'flex', justifyContent: 'center', textAlign: 'center', fontWeight:700}}>
+        {zakat !== null && (
+          <Typography variant="h6" sx={{ mt: 2, color: 'green', display: 'flex', justifyContent: 'center', textAlign: 'center', fontWeight: 700 }}>
             Zakat (2.5%) <br></br> Rp{zakat.toLocaleString('id-ID')}
           </Typography>
         )}
