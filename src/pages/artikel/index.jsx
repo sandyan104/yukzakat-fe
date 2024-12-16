@@ -1,92 +1,77 @@
+import React, { useEffect, useState } from "react";
 import {
 	Box,
-	Button,
-	Card,
-	CardActions,
-	CardContent,
-	CardMedia,
 	Container,
-	FormControl,
-	FormControlLabel,
-	FormLabel,
-	Grid2 as Grid,
-	InputAdornment,
-	InputLabel,
-	MenuItem,
-	Paper,
-	Radio,
-	RadioGroup,
-	Select,
-	TextField,
+	Grid,
 	Typography,
+	Paper
 } from "@mui/material";
 import styles from "./styles";
-import { useState } from "react";
 import niat from "../../assets/niat.png";
 import { useNavigate } from "react-router-dom";
 
 const Artikel = () => {
-	let navigate = useNavigate();
-	const [age, setAge] = useState("");
+	const [artikels, setArtikels] = useState([]);
 
-	const handleChange = (event) => {
-		setAge(event.target.value);
-	};
+	useEffect(() => {
+		fetch("http://127.0.0.1:8000/artikel/") // Replace with your backend URL
+			.then((response) => response.json())
+			.then((data) => setArtikels(data))
+			.catch((error) => console.error("Error fetching artikels:", error));
+	}, []);
 
 	return (
-		<>
-			<div style={styles.container}>
-				<Typography variant='h4' mt={4} mb={6} color='white' fonFtWeight={300}
-					component={ButtonBase}
-					onClick={routeChange}
+		<div style={styles.container}>
+			<Typography variant='h4' mt={4} mb={6} color='white' fontWeight={300}>
+				<b>Yuk</b>Zakat.id
+			</Typography>
+			<Container
+				disableGutters
+				maxWidth="lg"
+				component={Paper}
+				sx={{
+					borderRadius: 4,
+					display: "flex",
+					flexDirection: "column",
+					alignItems: "center",
+					marginBottom: "80px",
+					padding: "40px",
+				}}
+			>
+				<Typography
+					variant="h4"
+					mb={4}
+					color="#4a628a"
+					fontWeight={700}
+					textAlign="center"
 				>
-					<b>Yuk</b>Zakat.id
+					Kabar Zakat
 				</Typography>
-				<Container
-					disableGutters
-					maxWidth='lg'
-					component={Paper}
-					sx={{
-						borderRadius: 4,
-						display: "flex",
-						flexDirection: "column",
-						alignItems: "center",
-						marginBottom: "80px",
-						padding: "40px",
-					}}
-				>
-					<Typography
-						variant='h4'
-						mb={4}
-						color='#4a628a'
-						fontWeight={700}
-						textAlign='center'
-					>
-						Kabar Zakat
-					</Typography>
-
-					<Grid container spacing={3}>
-						<Grid item size={{ xs: 12, md: 6, lg: 3 }}>
-							<img width="100%" src="https://randomwordgenerator.com/img/picture-generator/55e6d5444254af14f1dc8460962e33791c3ad6e04e50744075277cdc964fc0_640.jpg" alt="" />
+				<Grid container spacing={3}>
+					{artikels.map((artikel) => (
+						<Grid item xs={12} md={6} lg={4} key={artikel.id_artikel}>
+							<Paper elevation={3} sx={{ padding: 2 }}>
+								<img
+									src={artikel.hero_image}
+									alt={artikel.judul}
+									style={{ width: "100%", borderRadius: "8px" }}
+								/>
+								<Typography
+									gutterBottom
+									variant="h5"
+									component="div"
+									mt={2}
+								>
+									{artikel.judul}
+								</Typography>
+								<Typography variant="body2" color="text.secondary">
+									Contact Amil: {artikel.no_telp_amil}
+								</Typography>
+							</Paper>
 						</Grid>
-						<Grid item size="grow">
-							<Typography gutterBottom variant="h5" component="div" >
-								Lizard
-							</Typography>
-							<Typography variant="body2" sx={{ color: 'text.secondary' }}>
-								Lizards are a widespread group of squamate reptiles, with over 6,000
-								species, ranging across all continents except Antarctica
-								Lizards are a widespread group of squamate reptiles, with over 6,000
-								species, ranging across all continents except Antarctica
-								Lizards are a widespread group of squamate reptiles, with over 6,000
-								species, ranging across all continents except Antarctica
-								Lizards are a widespread group of squamate reptiles, with over 6,000
-								species, ranging across all continents except Antarctica
-							</Typography>
-						</Grid>
-					</Grid>
-				</Container>
-			</div>
+					))}
+				</Grid>
+			</Container>
 			<div
 				style={{
 					width: "100%",
@@ -103,7 +88,7 @@ const Artikel = () => {
 					Jl. Kebon Bibit Barat, Tamansari, Bandungwetan, Kota Bandung
 				</Typography>
 			</div>
-		</>
+		</div>
 	);
 };
 
