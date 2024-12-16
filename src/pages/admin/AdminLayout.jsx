@@ -89,7 +89,7 @@ function AdminLayout({ children }) {
 }
 
 AdminLayout.propTypes = {
-  children: PropTypes.func,
+  children: PropTypes.object,
 };
 
 export default AdminLayout;

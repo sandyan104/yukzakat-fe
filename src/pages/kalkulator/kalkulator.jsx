@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { TextField, Button, Box, Typography, Paper } from '@mui/material';
 import styles from "./styles";
-import niat from "../../assets/niat.png";
 
 function formatCurrency(value) {
   if (!value) return '';
@@ -42,10 +41,7 @@ function Kalkulator() {
 
   return (
     <div style={styles.container}>
-      <Typography variant='h4' mt={4} mb={6} color='white' fontWeight={300}
-        component={ButtonBase}
-        onClick={routeChange}
-      >
+      <Typography variant='h4' mt={4} mb={6} color='white' fontWeight={300}>
         <b>Yuk</b>Zakat.id
       </Typography>
       <Box
