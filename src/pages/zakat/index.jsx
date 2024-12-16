@@ -16,18 +16,18 @@ import {
 	Typography,
 } from "@mui/material";
 import styles from "./styles";
-import { useState } from "react";
+// import { useState } from "react";
 import niat from "../../assets/niat.png";
 import { useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
+// import { useForm } from "react-hook-form";
 
 const Zakat = () => {
 	let navigate = useNavigate();
-	const {handleSubmit, control} = useForm()
+	// const {handleSubmit, control} = useForm()
 
-	const handleChange = (event) => {
-		setAge(event.target.value);
-	};
+	// const handleChange = (event) => {
+	// 	setAge(event.target.value);
+	// };
 
 	return (
 		<>
@@ -98,9 +98,9 @@ const Zakat = () => {
 						<Select
 							labelId='demo-simple-select-label'
 							id='demo-simple-select'
-							value={age}
+							// value={age}
 							label='Jenis Zakat'
-							onChange={handleChange}
+							// onChange={handleChange}
 						>
 							<MenuItem value={10}>Mal</MenuItem>
 							<MenuItem value={20}>Fitrah</MenuItem>

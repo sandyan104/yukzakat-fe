@@ -1,9 +1,6 @@
 import {
 	Container,
-	FormControl,
-	FormControlLabel,
-	FormLabel,
-	Grid2 as Grid,
+	// Grid2 as Grid,
 	Card,
 	CardContent,
 	CardMedia,
@@ -13,8 +10,7 @@ import {
 	ButtonBase,
 } from "@mui/material";
 import styles from "./styles";
-import { useState } from "react";
-import niat from "../../assets/niat.png";
+// import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Laporan = () => {

@@ -147,7 +147,6 @@ const Home = () => {
 				</Typography>
 				<Typography variant='body2' color='white' fontWeight={200}>
 					Jl. Raya Katapang-Andir, Sangkanhurip, Katapang, Kab.Bandung
-					<br /><br/>
 					Jl. Kebon Bibit Barat, Tamansari, Bandungwetan, Kota Bandung
 				</Typography>
 			</div>
