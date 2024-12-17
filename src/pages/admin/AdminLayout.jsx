@@ -6,7 +6,7 @@ import { AppProvider } from "@toolpad/core/react-router-dom";
 import { DashboardLayout, ThemeSwitcher } from "@toolpad/core/DashboardLayout";
 import { DashboardOutlined, RedeemOutlined } from "@mui/icons-material";
 import { Button, Stack } from "@mui/material";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import AxiosInstance from "../../utils/AxiosInstance";
 
 const NAVIGATION = [
@@ -48,12 +48,14 @@ const customTheme = createTheme({
 
 function Logout() {
   const navigate = useNavigate();
+	
   const logoutUser = () => {
     AxiosInstance.post(`logout/`, {}).then(() => {
       localStorage.removeItem("Token");
       navigate("/admin/login");
     });
   };
+
   return (
     <Stack direction="row" spacing={2}>
       <Button onClick={logoutUser}>Logout</Button>
