@@ -143,7 +143,7 @@ const Zakat = () => {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            marginBottom: "80px",
+            marginBottom: "40px",
             padding: "40px",
           }}
         >
@@ -169,6 +169,7 @@ const Zakat = () => {
               <MenuItem value={4}>Emas</MenuItem>
             </Select>
           </FormControl>
+
           <TextField
             label="Nominal"
             variant="outlined"
@@ -181,18 +182,35 @@ const Zakat = () => {
             }}
             sx={{ marginBottom: "20px" }}
           />
+        </Container>
 
+        <Container
+          disableGutters
+          maxWidth="sm"
+          component={Paper}
+          sx={{
+            borderRadius: 4,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            marginBottom: "80px",
+            padding: "40px",
+          }}
+        >
+          <Typography variant="h4" mb={4} color="#4a628a" fontWeight={700} textAlign="center" sx={{ marginBottom: "45px" }}>
+            Pembayaran
+          </Typography>
           <Stack direction="row" spacing={2} sx={{ width: "100%" }} mb={3}>
             <TextField
               label="Bukti Pembayaran"
               fullWidth
               InputProps={{
-              	startAdornment: <></>,
-              	// endAdornment:  (
-              	// 	<Button onClick={handleSubmitImage} color='primary'>
-              	// 		Submit
-              	// 	</Button>
-              	// ),
+                startAdornment: <></>,
+                // endAdornment:  (
+                // 	<Button onClick={handleSubmitImage} color='primary'>
+                // 		Submit
+                // 	</Button>
+                // ),
               }}
               type="file"
               accept="image/*"
@@ -202,6 +220,10 @@ const Zakat = () => {
           </Stack>
           {preview && <img src={preview} alt="Preview" width="200" />}
 
+          <Typography sx={{fontSize: "10px", paddingBottom: "10px", textAlign: "justify", paddingTop:"10px"}}>
+            Dengan mengisi formulir ini, Muzaki menyatakan bahwa zakat yang ditunaikan berasal dari sumber halal yang sesuai dengan peraturan, bukan hasil pencucian uang, dan merupakan harta yang
+            dimiliki secara penuh, serta menyetujui untuk menerima Bukti Setor Zakat (BSZ), laporan penyaluran, dan informasi layanan BAZNAS melalui email dan WhatsApp
+          </Typography>
           <Button fullWidth variant="contained" onClick={handleSubmit} sx={{ marginBottom: "20px" }}>
             Bayar Zakat
           </Button>
