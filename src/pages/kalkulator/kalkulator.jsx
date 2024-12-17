@@ -156,9 +156,50 @@ function Kalkulator() {
 								</Typography>
 							)}
 						</>
-					) : (
-						<p>Sangu</p>
-					)}
+					) : tipeZakat == "emas" ? (
+					<>
+						<TextField
+								label='Emas'
+								variant='outlined'
+								fullWidth
+								value={gaji}
+								onChange={handleGajiChange}
+								InputProps={{
+									startAdornment: (
+										<Typography sx={{ marginRight: 1 }}>Rp</Typography>
+									),
+								}}
+								sx={{ mb: 2 }}
+							/>
+
+							<Typography variant='h8' fontWeight={500} mt={4}>
+								Jumlah Penghasilan per Bulan
+							</Typography>
+
+							<Typography variant='h6' fontWeight={700}>
+								Rp{jumlahPenghasilan.toLocaleString("id-ID")}
+							</Typography>
+							<br />
+							{zakat !== null && (
+								<Typography
+									variant='h6'
+									mb={4}
+									sx={{
+										color: "green",
+										display: "flex",
+										justifyContent: "center",
+										textAlign: "center",
+										fontWeight: 700,
+									}}
+								>
+									Zakat (2.5%) <br></br> Rp{zakat.toLocaleString("id-ID")}
+								</Typography>
+							)}
+					</>) : (<>
+					<Typography>
+						Opsi ini belum dilanjutkan.
+					</Typography>
+					</>)}
 					<Grid container sx={{ width: "100%" }} spacing={3}>
 						<Grid item size={6}>
 							<Button fullWidth variant='outlined' onClick={resetFields}>
